@@ -1,6 +1,6 @@
-# Links
+# Clinical Trial Links
 
-Service to accept, store and serve links. For Linked Clinical Trials pilot.
+Store to keep track of clinical trial IDs and links during feature research for Linked Clinical Trials pilot.
 
 ## License
 
