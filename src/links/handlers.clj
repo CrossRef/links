@@ -22,17 +22,20 @@
                      subject (get-in ctx [:request :params "subject"])
                      subject-type (get-in ctx [:request :params "subject-type"])
                      predicate (get-in ctx [:request :params "predicate"])
+                     predicate-type (get-in ctx [:request :params "predicate-type"])
                      object (get-in ctx [:request :params "object"])
                      object-type (get-in ctx [:request :params "object-type"])
-                     links (database/find-links subject subject-type predicate object object-type offset page-limit)
-                     links (map #(select-keys % [:subject :subjectType :predicate :object :objectType :provenance]) links)
-                     ]
+                     distinct-fields (get-in ctx [:request :params "distinct"])
+                     distinct-fields (when (> (count distinct-fields) 0) (clojure.string/split distinct-fields #","))
+                     links (database/find-links subject subject-type predicate predicate-type object object-type offset page-limit distinct-fields)
+                     links (map #(select-keys % [:subject :subjectType :predicate :predicateType :object :objectType :provenance]) links)]
                  {:status "ok",
                   :message-type "link-list",
                   :message-version "1.0.0",
                   :message {
                     :items-per-page page-limit,
                     :items links}})))
+
 
 (defresource post-links
   []

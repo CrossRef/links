@@ -4,6 +4,7 @@ CREATE TABLE links (
     subjectType varchar(512) NOT NULL,
     
     predicate varchar(128) NOT NULL,
+    predicateType varchar(128) NOT NULL,
 
     object varchar(512) NOT NULL,
     objectType varchar(512) NOT NULL,
@@ -19,4 +20,4 @@ CREATE INDEX predicate ON links (predicate);
 CREATE INDEX object ON links (object);
 CREATE INDEX objectType ON links (objectType);
 CREATE INDEX provenance ON links (provenance);
-CREATE UNIQUE INDEX spop ON links (subject, subjectType, predicate, object, objectType, provenance);
+CREATE UNIQUE INDEX spop ON links (subject, subjectType, predicate, predicateType, object, objectType, provenance);
